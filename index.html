@@ -19,7 +19,7 @@
 
 </head>
 <body>
-    <div id="map"></div>
+    <div id="map" style="height: 600px;"></div>
     <button id="toggleTrainStops">Toggle Train Stops</button>
     <script type="text/javascript">
         // Initialize the map
@@ -36,14 +36,6 @@
         };
         L.control.layers(basemaps).addTo(map);
         basemaps.StreetView.addTo(map);
-
-        // Markers for landmarks
-('map').setView([51.505, -0.09], 13);
-
-        // Base map layer
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
 
         // Landmarks
         const landmarks = [
