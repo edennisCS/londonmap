@@ -13,30 +13,7 @@
     crossorigin=""></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .leaflet-popup-content-wrapper {
-            max-width: 250px; /* Adjust width as needed */
-            word-wrap: break-word;
-        }
-        .popup-content {
-            display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .popup-content.show-more {
-            max-height: 100px; /* Adjust height for initial view */
-            overflow: hidden;
-            position: relative;
-        }
-        .popup-content.show-more.expanded {
-            max-height: none;
-        }
-        .toggle-more {
-            color: blue;
-            cursor: pointer;
-            text-decoration: underline;
-        }
-    </style>
+
 </head>
 <body>
     <div id="map" style="height: 600px;"></div>
@@ -139,18 +116,16 @@
             }
             const shortContent = content.slice(0, maxLength) + '...';
             const showMoreHtml = `
-                <div class="popup-content show-more">
+                <div class="popup-content truncated">
                     ${shortContent}
                     <span class="toggle-more">Show more</span>
                 </div>
-            `;
-            const fullContentHtml = `
-                <div class="popup-content expanded">
+                <div class="popup-content full" style="display:none;">
                     ${content}
                     <span class="toggle-more">Show less</span>
                 </div>
             `;
-            return showMoreHtml + fullContentHtml;
+            return showMoreHtml;
         }
 
         // Add landmark markers to the map
@@ -235,8 +210,14 @@
             contentContainer.addEventListener('click', function(event) {
                 if (event.target.classList.contains('toggle-more')) {
                     const popupContent = event.target.closest('.popup-content');
-                    popupContent.classList.toggle('expanded');
-                    event.target.textContent = popupContent.classList.contains('expanded') ? 'Show less' : 'Show more';
+                    if (popupContent.classList.contains('truncated')) {
+                        popupContent.style.display = 'none';
+                        popupContent.nextElementSibling.style.display = 'block';
+                    } else if (popupContent.classList.contains('full')) {
+                        popupContent.style.display = 'none';
+                        popupContent.previousElementSibling.style.display = 'block';
+                    }
+                    event.target.textContent = popupContent.classList.contains('truncated') ? 'Show less' : 'Show more';
                 }
             });
         });
