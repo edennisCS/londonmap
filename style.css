@@ -1,41 +1,61 @@
-    body {
-        margin: 0;
-        padding: 0;
-    }
+body {
+    margin: 0;
+    padding: 0;
+}
 
-    #map {
-        width: 100%;
-        height: 100vh;
-    }
+#map {
+    width: 100%;
+    height: 100vh;
+}
 
-    #toggleTrainStops {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: white;
-        padding: 10px;
-        z-index: 1000;
-    }
+#toggleTrainStops {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: white;
+    padding: 10px;
+    z-index: 1000;
+    border: 1px solid #ddd; /* Add border for visibility */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow */
+}
 
-    .leaflet-popup-content-wrapper {
-        max-width: 250px; /* Adjust width as needed */
-        word-wrap: break-word;
-    }
-    .popup-content {
-        display: block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .popup-content.truncated {
-        max-height: 100px; /* Adjust height for truncated view */
-        overflow: hidden;
-        position: relative;
-    }
-    .popup-content.full {
-        max-height: none;
-    }
-    .toggle-more {
-        color: blue;
-        cursor: pointer;
-        text-decoration: underline;
-    }
+.leaflet-popup-content-wrapper {
+    max-width: 250px; /* Adjust width as needed */
+    word-wrap: break-word;
+    padding: 10px; /* Add padding inside the popup */
+}
+
+.popup-content {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.popup-content.truncated {
+    max-height: 100px; /* Adjust height for truncated view */
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px; /* Space between truncated and "Show more" */
+}
+
+.popup-content.full {
+    max-height: none;
+}
+
+.toggle-more {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline-block;
+    margin-top: 5px; /* Space above the toggle link */
+}
+
+/* Additional styles for better interaction */
+.toggle-more:hover {
+    color: darkblue;
+}
+
+.toggle-more:active {
+    color: navy;
+}
