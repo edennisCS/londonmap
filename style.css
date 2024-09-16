@@ -32,30 +32,15 @@ body {
     text-overflow: ellipsis;
 }
 
-.popup-content.truncated {
-    max-height: 100px; /* Adjust height for truncated view */
-    overflow: hidden;
-    position: relative;
-    margin-bottom: 10px; /* Space between truncated and "Show more" */
+.popup-content {
+    max-height: 150px; /* Set a max height for the popup content */
+    overflow-y: auto; /* Add vertical scrolling if content overflows */
+    padding: 10px;
+    box-sizing: border-box; /* Ensure padding is included in the height calculation */
 }
 
-.popup-content.full {
-    max-height: none;
+.popup-content img {
+    max-width: 100%; /* Ensure images do not exceed the content width */
+    height: auto;
 }
 
-.toggle-more {
-    color: blue;
-    cursor: pointer;
-    text-decoration: underline;
-    display: inline-block;
-    margin-top: 5px; /* Space above the toggle link */
-}
-
-/* Additional styles for better interaction */
-.toggle-more:hover {
-    color: darkblue;
-}
-
-.toggle-more:active {
-    color: navy;
-}
