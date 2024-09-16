@@ -6,11 +6,14 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
     integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
     crossorigin=""/>
+    <!-- Include Leaflet.markercluster CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
     integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
     crossorigin=""></script>
+    <!-- Include Leaflet.markercluster JS -->
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="style.css">
 
@@ -108,26 +111,6 @@
             }
         ];
 
-        // Function to format popup content
-        function formatPopupContent(content) {
-            const maxLength = 200; // Length limit for truncated text
-            if (content.length <= maxLength) {
-                return content; // Return full content if short
-            }
-            const shortContent = content.slice(0, maxLength) + '...';
-            const showMoreHtml = `
-                <div class="popup-content truncated">
-                    ${shortContent}
-                    <span class="toggle-more">Show more</span>
-                </div>
-                <div class="popup-content full" style="display:none;">
-                    ${content}
-                    <span class="toggle-more">Show less</span>
-                </div>
-            `;
-            return showMoreHtml;
-        }
-
         // Add landmark markers to the map
         landmarks.forEach(landmark => {
             const landmarkIcon = L.icon({
@@ -135,9 +118,8 @@
                 iconSize: [50, 50],
                 attribution: `<a href="https://www.flaticon.com/free-icons/${landmark.name.toLowerCase()}" title="${landmark.name.toLowerCase()} icons">${landmark.name} icons created by Flaticon</a>`
             });
-            const popupContent = formatPopupContent(landmark.popupContent);
             L.marker([landmark.lat, landmark.lon], { icon: landmarkIcon })
-                .bindPopup(popupContent)
+                .bindPopup(landmark.popupContent)
                 .addTo(map);
         });
 
@@ -201,26 +183,6 @@
             .setContent("<b>Welcome to London Map 💂🎡🌉</b><br />Click on the markers to learn more about each attraction, and the nearby stations.")
             .openOn(map);
 
-        // Event delegation for toggle functionality in popups
-        map.on('popupopen', function(e) {
-            const popup = e.popup;
-            const contentContainer = popup.getContent();
-
-            // Delegate click event for Show More/Show Less
-            contentContainer.addEventListener('click', function(event) {
-                if (event.target.classList.contains('toggle-more')) {
-                    const popupContent = event.target.closest('.popup-content');
-                    if (popupContent.classList.contains('truncated')) {
-                        popupContent.style.display = 'none';
-                        popupContent.nextElementSibling.style.display = 'block';
-                    } else if (popupContent.classList.contains('full')) {
-                        popupContent.style.display = 'none';
-                        popupContent.previousElementSibling.style.display = 'block';
-                    }
-                    event.target.textContent = popupContent.classList.contains('truncated') ? 'Show less' : 'Show more';
-                }
-            });
-        });
     </script>
 </body>
 </html>
