@@ -16,3 +16,29 @@
         padding: 10px;
         z-index: 1000;
     }
+
+.leaflet-popup-content-wrapper {
+    max-width: 250px; /* Adjust width as needed */
+    word-wrap: break-word;
+}
+
+.popup-content {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.popup-content.show-more {
+    max-height: 100px; /* Adjust height for initial view */
+    overflow: hidden;
+}
+
+.popup-content.show-more.expanded {
+    max-height: none;
+}
+
+.toggle-more {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
